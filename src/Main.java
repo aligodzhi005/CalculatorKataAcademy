@@ -28,7 +28,7 @@ public class Main {
     }
 
     //метод, который переводит арабское число в римское
-    public final static String toRoman(int number) {
+    public static String toRoman(int number) {
         int l =  map.floorKey(number);
         if ( number == l ) {
             return map.get(number);
@@ -38,8 +38,8 @@ public class Main {
 
     //метод, проверяющий есть ли элемент в массиве строк
     public static boolean containsInArray(String[] array, String elem) {
-        for(int i = 0; i < array.length; i++) {
-            if (array[i].equals(elem)) {
+        for (String s : array) {
+            if (s.equals(elem)) {
                 return true;
             }
         }
@@ -69,10 +69,10 @@ public class Main {
         }
         //сперва надо проверить на римские числа
         isRimNum = containsInArray(rimNumbers, splitInput[0]);
-        if (isRimNum == true)
+        if (isRimNum)
             isRimNum = containsInArray(rimNumbers, splitInput[2]);
         //потом надо проверить на арабские числа так как Integer.parseInt возвращает исключение в случае провала
-        if (isRimNum == false) {
+        if (!isRimNum) {
             int tmp = Integer.parseInt(splitInput[0]);
             parseResult(tmp);
             tmp = Integer.parseInt(splitInput[2]);
@@ -108,7 +108,7 @@ public class Main {
 
     //метод, который считает римские числа и возвращает результат в римском виде
     public static String calcRim(String[] splitInput) throws Exception{
-        int result = 0;
+        int result;
         int[] elements = new int[2];
         elements[0] = indexInArray(rimNumbers, splitInput[0]) + 1;
         elements[1] = indexInArray(rimNumbers, splitInput[2]) + 1;
@@ -120,8 +120,8 @@ public class Main {
         return toRoman(result);
     }
 
-    public static String calcArab(String[] splitInput) throws Exception {
-        int result = 0;
+    public static String calcArab(String[] splitInput){
+        int result;
         int[] elements = new int[2];
         elements[0] = Integer.parseInt(splitInput[0]);
         elements[1] = Integer.parseInt(splitInput[2]);
@@ -133,7 +133,7 @@ public class Main {
     public static String calc(String input) throws Exception{
         String[] splitedInput = splitAndValidate(input);
         String result;
-        if (isRimNum == true) {
+        if (isRimNum) {
             result = calcRim(splitedInput);
         } else {
             result = calcArab(splitedInput);
