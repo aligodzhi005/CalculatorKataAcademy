@@ -114,7 +114,7 @@ public class Main {
         elements[1] = indexInArray(rimNumbers, splitInput[2]) + 1;
         result = mathCalc(elements, splitInput[1]);
 
-        if (result < 0)
+        if (result < 1)
             throw new IOException();
 
         return toRoman(result);
